@@ -12,3 +12,35 @@ Following is the data source which is in streaming fashion basically webserver l
 
 This is how the data is generating ever minute. This data is ingested into a Kafka Topic and consumed using Spark Structured Streaming. Transformations are done in spark to get department traffic per minute. The result is stored in the AWS S3 bucket.
 
+
+Make sure your kafka is installed and configured properly.
+
+1.Start Zookeeper service
+zookeeper-server-start.sh \
+  -daemon /home/dilip/kafka/config/zookeeper.properties
+ 
+2. Start Kafka
+ kafka-server-start.sh \
+  -daemon /home/dilip/kafka/server.properties
+
+3. Create kafka topic and validate
+kafka-topics.sh --zookeeper localhost:2181 \
+  --create \
+  --topic dilip \
+  --partitions 2 \
+  --replication-factor 1
+
+kafka-topics.sh --zookeeper localhost:2181 \
+  --list \
+  --topic dilip 
+
+kafka-topics.sh --zookeeper localhost:2181 \
+  --describe \
+  --topic dilip
+  
+4. Produce Messages to Kafka Topic
+tail_logs.sh | kafka-console-producer.sh \
+  --broker-list localhost:9092 \
+  --topic dilip
+  
+ Once your kafka is up and running. Start your spark Cluster and run using spark-submit. 
