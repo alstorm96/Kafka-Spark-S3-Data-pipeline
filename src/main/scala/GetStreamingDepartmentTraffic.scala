@@ -9,7 +9,7 @@ import org.apache.spark.sql.functions._
 import org.apache.spark.sql.{ForeachWriter, Row, SparkSession}
 import org.apache.spark.sql.functions.{col, to_timestamp, split}
 
-//feature branch new changes
+//feature change
 object GetStreamingDepartmentTraffic {
   def main(args: Array[String]): Unit = {
 
